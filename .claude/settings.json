@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"REMINDER: This project uses the obsidian-vault-workflow skill as the mandatory protocol for vault read/write. BEFORE any task: invoke the obsidian-vault-workflow skill, then locate/read the relevant topic file in vault/Meeting Notes/ (Overview + Open Questions + Session Log) plus 2-3 most recent Meeting Notes. AFTER any task: append a dated ### YYYY-MM-DD entry with [status] tag at the bottom of the topic file Session Log, update Open Questions, use [[wikilinks]] for cross-refs, and verify by reading back the file.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
