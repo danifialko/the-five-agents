@@ -20,3 +20,12 @@
   - **Verification חובה** — `test -s` לפני שמדווחים הצלחה. כך לא מקבלים PNG ריק כתוצאה של שגיאת API.
 - **Notes / Caveats:** הסקיל לא מטפל ב-rate-limits. אסור להחזיר את `OPENAI_API_KEY` בדיווח/log — מצוין מפורשות בסקיל.
 - **Related:** [[forlan-creative-agent]], [[claude-folder-structure]], [[root-config-files]]
+
+### 2026-05-06 — Skill hardened after first real run [shipped]
+- **What was done:** ריצה ראשונה אמיתית עבור בקשת תמונה ("כבשה רוכבת על שור, סוס בורח") חשפה שלוש בעיות: (1) `python`/`jq`/`node` לא ב-PATH על המכונה — `python` הוא alias של Microsoft Store launcher; (2) `Invoke-RestMethod` עם string body שלח encoding שגוי וקיבל `400 invalid_json`; (3) ניסוח ראשוני עם "terrified"/"panicked" נחסם ע"י `moderation_blocked`. עדכון הסקיל: PowerShell עכשיו הנתיב הראשי המומלץ (Windows-first), עם `[System.Text.Encoding]::UTF8.GetBytes($body)` חובה. הוספת סעיפי errors ל-`moderation_blocked` ו-`invalid_json`. הסקריפט `generate.py` נשמר כ-fallback.
+- **Decisions:**
+  - **PowerShell first.** Windows-first project — אין סיבה להעדיף python שלא מותקן.
+  - **UTF-8 bytes חובה** — כל prompt עם תווים לא-ASCII (או אפילו punctuation מסוים) ייכשל בלי זה.
+  - **Soft retry על moderation** — רכך ניסוח ונסה שוב פעם אחת בלבד; אל תיכנס ל-loop.
+- **Notes / Caveats:** ה-API החזיר תמונה 1.9 MB (PNG, 1024x1024, quality=medium). זמן תגובה ~30-60 שניות.
+- **Related:** [[forlan-creative-agent]]

@@ -26,7 +26,38 @@ set -a; source .env; set +a
 
 **אסור** לכלול את המפתח ב-prompt, ב-log, או בקובץ הפלט.
 
-## How to call — bash + jq
+## Recommended path — PowerShell (Windows)
+
+ב-Windows אין tipically `python`/`jq` ב-PATH, אבל PowerShell תמיד זמין ויש לו JSON + base64 מובנים. **זה הנתיב הראשי בפרויקט הזה.**
+
+```powershell
+$envFile = Get-Content .env | Where-Object { $_ -match '^OPENAI_API_KEY=' }
+$key = ($envFile -split '=', 2)[1].Trim()
+$prompt = (Get-Content $env:PROMPT_FILE -Raw).Trim()   # or assign $prompt directly
+$out = $env:OUTPUT
+$body = @{
+  model="gpt-image-2"; prompt=$prompt; size="1024x1024";
+  quality="medium"; output_format="png"
+} | ConvertTo-Json -Compress
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($body)   # critical for non-ASCII
+
+$resp = Invoke-RestMethod `
+  -Uri "https://api.openai.com/v1/images/generations" `
+  -Method Post `
+  -Headers @{Authorization="Bearer $key"} `
+  -ContentType "application/json; charset=utf-8" `
+  -Body $bytes -TimeoutSec 240
+
+$abs = (Resolve-Path .).Path + "\" + $out.Replace('/','\')
+[IO.File]::WriteAllBytes($abs, [Convert]::FromBase64String($resp.data[0].b64_json))
+Write-Output ("wrote " + $out + " (" + (Get-Item $out).Length + " bytes)")
+```
+
+**חשוב — UTF-8 encoding לגוף הבקשה.** בלי זה ה-API מחזיר 400 (`unicode decode error`).
+
+על שגיאת `400 invalid_json` או `moderation_blocked` — קרא את `$_.ErrorDetails.Message` (לא רק `$_.Exception.Message`) כדי לראות את גוף השגיאה האמיתי מ-OpenAI.
+
+## How to call — bash + jq (אופציונלי — רק אם jq זמין)
 
 ```bash
 set -a; source .env; set +a
@@ -43,7 +74,7 @@ curl -sS -X POST "https://api.openai.com/v1/images/generations" \
   }" | jq -r '.data[0].b64_json' | base64 --decode > "$OUTPUT"
 ```
 
-## How to call — Python fallback (Git Bash בלי jq)
+## How to call — Python fallback (אם python מותקן)
 
 ```python
 import os, json, base64, urllib.request, sys
@@ -110,6 +141,8 @@ test -s "$OUTPUT" && echo "OK $(stat -c%s "$OUTPUT") bytes" || { echo "FAIL: $OU
 - אם תגובת ה-API לא מכילה `data[0].b64_json` — דווח את `error.message` המלא ועצור. אל תייצר קובץ ריק.
 - אם `OPENAI_API_KEY` לא קיים — עצור עם הודעה ברורה. אל תנסה לקרוא ל-API ללא מפתח.
 - אם המפתח לא תקף (401) — דווח למשתמש; אל תרגנר.
+- **`moderation_blocked` (400)** — ה-prompt נדחה ע"י safety filter. רכך ניסוח (החלף "terrified"→"surprised", "panicked"→"playful", וכו'), נסה שוב פעם אחת. אם נחסם פעמיים — דווח למשתמש.
+- **`invalid_json` עם "unicode decode error"** — שכחת UTF-8 encoding לגוף הבקשה. השתמש ב-`[System.Text.Encoding]::UTF8.GetBytes($body)` לפני שליחה.
 
 ## Rate limits / retries
 
