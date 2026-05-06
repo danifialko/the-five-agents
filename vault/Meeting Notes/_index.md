@@ -11,3 +11,5 @@ Code, architecture, decisions, and file-inventory notes for **the-five-agents**.
 - [[obsidian-skills-catalog]] — 3 Obsidian-related skills (`obsidian-bases`, `obsidian-markdown`, `obsidian-vault-workflow`)
 - [[anthropic-skills-catalog]] — official Anthropic skills installed at project scope (`skill-creator`)
 - [[enzo-ceo-agent]] — Enzo, the CEO agent (orchestrator + QC, project entry point)
+- [[forlan-creative-agent]] — Forlan, the creative / image-generation agent (hybrid `.claude/agents/forlan.md` + `forlan/` workspace)
+- [[gpt-image-gen-skill]] — wrapper around OpenAI Images API (`gpt-image-2`); shared by all agents that need to generate images

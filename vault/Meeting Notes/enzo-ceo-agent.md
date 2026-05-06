@@ -28,3 +28,9 @@
   - **`description` בגוף שלישי, "Use when…"** — כדי ש-Claude Code ינתב משימות אליו אוטומטית כשהן מתאימות.
 - **Notes / Caveats:** הסוכנים המתמחים טרם קיימים. עד שיוגדרו, Enzo יזהה זאת בריצה ויסמן אותה כ-blocker במקום לבצע עבודה ללא צוות.
 - **Related:** [[claude-folder-structure]], [[root-config-files]], [[anthropic-skills-catalog]]
+
+### 2026-05-06 — forlan registered under Enzo [shipped]
+- **What was done:** הוספת סקציית "Sub-Agents Under Your Command" ל-`.claude/agents/enzo.md`, עם forlan כסוכן הראשון, trigger keywords בעברית ובאנגלית, ו-definition-of-done. עדכון `CLAUDE.md` (Agents + Skills + Status) כך שכולל גם את forlan ואת הסקיל `gpt-image-gen`.
+- **Decisions:** הסקציה ממוקמת אחרי "Role" ולפני "Operating Loop" — Enzo קורא אותה בשלב 5 ("בחירת סוכנים") של ה-loop. גם הוספה הנחיה: אם אין סוכן מתאים — לא מאלתרים.
+- **Notes / Caveats:** Open Question לגבי `model: opus` עדיין פתוח. סוכן `forlan` מוגדר כ-`sonnet`.
+- **Related:** [[forlan-creative-agent]], [[gpt-image-gen-skill]]
