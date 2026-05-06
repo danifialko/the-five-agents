@@ -34,3 +34,13 @@
 - **Decisions:** הסקציה ממוקמת אחרי "Role" ולפני "Operating Loop" — Enzo קורא אותה בשלב 5 ("בחירת סוכנים") של ה-loop. גם הוספה הנחיה: אם אין סוכן מתאים — לא מאלתרים.
 - **Notes / Caveats:** Open Question לגבי `model: opus` עדיין פתוח. סוכן `forlan` מוגדר כ-`sonnet`.
 - **Related:** [[forlan-creative-agent]], [[gpt-image-gen-skill]]
+
+### 2026-05-06 — cavani registered + image-substitution protocol [shipped]
+- **What was done:** הוספת cavani לרשימת ה-Sub-Agents ב-`.claude/agents/enzo.md` עם trigger keywords דו-לשוניים, I/O contract, ואיסור על מגע ב-`Content/Ready/`. הוספת סקציה חדשה "Protocol: post-cavani image substitution" עם 5 צעדים מפורשים: Read קובץ output, Grep ל-`{{IMAGE_NEEDED:`, dispatch forlan עם desc, Edit להחלפה ב-`![alt](../forlan/outputs/...)`, `mv` המקור ל-Ready/, append ל-vault, אישור למשתמש. עדכון Status ב-CLAUDE.md.
+- **Decisions:**
+  - **Enzo אחראי ל-substitution** ולא cavani — cavani הוא LLM-only ואין לו דרך לקרוא ל-API.
+  - **Enzo אחראי ל-`mv`** — cavani אין לו Bash; ה-flow של החלפת תמונות הוא מקום טבעי לאחד את שני השלבים (image-sub + move-source).
+  - **כשל-forlan ספציפי** משאיר את ה-placeholder ולא עוצר — המאמר עדיין שמיש, וניתן לרגנר לפי בקשת המשתמש.
+  - **relative path** `../forlan/outputs/<file>.png` ב-markdown image — מ-`Output/` זו הדרך לציין path נכון.
+- **Notes / Caveats:** עומס cognitive על Enzo גדל — הוא עכשיו אחראי על orchestration של שני סוכנים סדרתית (cavani→forlan) + post-processing. אם ה-pipeline יכבד, אולי כדאי skill ייעודי `image-substitution` שיעטוף את הצעדים.
+- **Related:** [[cavani-content-agent]], [[forlan-creative-agent]]

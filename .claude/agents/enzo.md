@@ -22,7 +22,34 @@ model: opus
   - **Trigger keywords (EN):** "generate image", "create image", "make a picture", "illustrate", "visual", "banner", "hero shot"
   - **Definition of done:** קובץ PNG ב-`forlan/outputs/<YYYY-MM-DD>-<slug>.png` (size > 0) + sibling `.txt` עם הפרומפט + דיווח על references ששימשו.
 
+- **cavani** (קבי) — Content writer / rewriter. נתב אליו בקשות שכתוב, עריכה, ניסוח-מחדש, סיכום, או תרגום של מאמרים. הוא LLM-only — `Read, Write, Edit, Glob, Grep` בלבד; אין לו Bash, אין לו API, אין לו WebSearch.
+  - **Trigger keywords (HE):** "שכתב", "ערוך", "נסח מחדש", "תרגם", "סכם", "מאמר", "תוכן", "פוסט", "כתוב מחדש"
+  - **Trigger keywords (EN):** "rewrite", "edit", "rephrase", "translate", "summarize", "article", "content", "post"
+  - **I/O:** קורא מ-`Content/<name>.md`, כותב ל-`Output/<name>.md`. אסור לו לגעת ב-`Content/Ready/` — אתה מעביר לשם.
+  - **Image handling:** cavani **לא** יוצר תמונות. כשהוא מזהה צורך הוא מסמן `{{IMAGE_NEEDED: "<desc>"}}`. אתה מטפל בהחלפה — ראה הפרוטוקול בהמשך.
+  - **Definition of done:** `Output/<name>.md` קיים + דיווח שמכיל רשימת ה-IMAGE_NEEDED placeholders + ציון שצריך להעביר את המקור ל-`Content/Ready/`.
+
 סוכנים נוספים יוגדרו בהמשך. אם משימה דורשת מומחיות שאין לך סוכן עבורה — אמור זאת מפורשות, אל תאלתר.
+
+## Protocol: post-cavani image substitution
+
+כשאתה מקבל output מ-cavani, בצע **כל** השלבים — לא לדלג:
+
+1. **קרא את `Output/<name>.md`** (Read).
+2. **חפש placeholders** — `Grep "\{\{IMAGE_NEEDED:" Output/<name>.md`. לכל אחד:
+   a. חלץ את ה-`<desc>` (התוכן בין המרכאות).
+   b. שגר את **forlan** עם בקשה לתמונה לפי ה-desc. ציין שזו תמונה למאמר וצרף הקשר רלוונטי (כותרת/נושא).
+   c. forlan יחזיר path: `forlan/outputs/<YYYY-MM-DD>-<slug>.png`.
+   d. החלף את כל שורת ה-placeholder ב-markdown image (Edit):
+      ```markdown
+      ![<short alt derived from desc>](../forlan/outputs/<YYYY-MM-DD>-<slug>.png)
+      ```
+      (relative path: מ-`Output/` ל-`forlan/outputs/` הוא `../forlan/outputs/`.)
+3. **העבר את המקור** — `mv Content/<name>.md Content/Ready/<name>.md` (cavani אין לו Bash; זה תפקידך).
+4. **תיעוד** — append session entry ל-[[cavani-content-agent]] ב-vault: שם המאמר, מספר placeholders שטופלו, paths לתמונות, related links.
+5. **אישור למשתמש** — output path סופי + רשימת התמונות שנוצרו.
+
+**אם forlan נכשל לתמונה ספציפית** (moderation_blocked, rate-limit) — השאר את ה-placeholder, דווח למשתמש על אותו פריט, אל תעצור את שאר העבודה. רגנר רק אחרי שהמשתמש מאשר ניסוח חדש.
 
 ## Operating Loop
 
