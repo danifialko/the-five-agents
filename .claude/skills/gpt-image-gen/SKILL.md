@@ -26,7 +26,47 @@ set -a; source .env; set +a
 
 **אסור** לכלול את המפתח ב-prompt, ב-log, או בקובץ הפלט.
 
-## Recommended path — PowerShell (Windows)
+## Two endpoints
+
+- **`/v1/images/generations`** — text → image. אין רפרנס.
+- **`/v1/images/edits`** — text + reference image(s) → image. שמור על זהות/סגנון מהרפרנס.
+
+לבחירה: אם המשימה כוללת קובץ ב-`forlan/reference/` שצריך לשמר ממנו זהות / אובייקט / סגנון מדויק — השתמש ב-`/edits`. אחרת — `/generations`.
+
+## How to call — `/edits` with reference (curl + PowerShell)
+
+ה-endpoint דורש multipart. ב-Windows: curl זמין, אבל JSON parsing קל יותר ב-PowerShell. השילוב:
+
+```bash
+set -a; source .env; set +a
+curl -sS -X POST "https://api.openai.com/v1/images/edits" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -F "model=gpt-image-1" \
+  -F "image[]=@forlan/reference/<file>.jpg" \
+  -F "prompt=<forlan/outputs/<slug>.txt" \
+  -F "size=1024x1024" \
+  -F "quality=medium" \
+  -o forlan/outputs/_response.json
+```
+
+(`-F "prompt=<file"` קורא את ה-prompt מהקובץ — מונע צרות quoting עם punctuation/quotes/newlines.)
+
+אז ב-PowerShell — מפענח את ה-base64:
+
+```powershell
+$json = Get-Content forlan/outputs/_response.json -Raw | ConvertFrom-Json
+if (-not $json.data) { Write-Output ($json | ConvertTo-Json -Depth 5); exit 1 }
+$out = "forlan/outputs/<slug>.png"
+$abs = (Resolve-Path .).Path + "\" + $out.Replace('/','\')
+[IO.File]::WriteAllBytes($abs, [Convert]::FromBase64String($json.data[0].b64_json))
+Remove-Item forlan/outputs/_response.json
+```
+
+ניתן להעביר כמה רפרנסים בכמה `-F "image[]=@..."` (עד 16 לפי התיעוד הנוכחי).
+
+ה-edits endpoint עובד עם `gpt-image-1` (`gpt-image-2` כרגע generations-only).
+
+## Recommended path — PowerShell (Windows) — for `/generations`
 
 ב-Windows אין tipically `python`/`jq` ב-PATH, אבל PowerShell תמיד זמין ויש לו JSON + base64 מובנים. **זה הנתיב הראשי בפרויקט הזה.**
 

@@ -40,6 +40,9 @@ model: sonnet
    - `PROMPT` = הפרומפט שניסחת
    - `OUTPUT` = `forlan/outputs/<YYYY-MM-DD>-<slug>.png` (slug = 2-4 מילים מקוצרות מהבקשה)
    - SIZE/QUALITY רק אם המשתמש ביקש ספציפית, אחרת default.
+   - **בחירת endpoint:**
+     - אם הבקשה דורשת **שימור זהות/אובייקט/סגנון מדויק** מקובץ ב-`reference/` (למשל "תמונה של [שם] עם...", או "סגנון בדיוק כמו ב-X") → `/v1/images/edits` עם `image[]=@<file>`.
+     - אחרת (סגנון נלקח כהשראה רכה בלבד, או אין reference) → `/v1/images/generations`.
 
 5. **שמירת ה-prompt** — אחרי שהסקיל מסיים, כתוב sibling file:
    `forlan/outputs/<YYYY-MM-DD>-<slug>.txt` — עם הפרומפט המלא ששימש. זה קריטי לאיטרציה.
