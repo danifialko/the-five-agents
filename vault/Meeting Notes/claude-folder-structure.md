@@ -10,7 +10,7 @@ The `.claude/` directory holds project-specific customizations for Claude Code: 
 
 ### `.claude/agents/`
 - **Purpose:** Project-specific subagents. Each agent is a `.md` file describing the agent's role, tools, and behavior.
-- **Status:** empty (only `.gitkeep`). The "CEO" agent and the content-team sub-agents will live here once defined.
+- **Status:** contains `enzo.md` (the CEO agent — see [[enzo-ceo-agent]]). Specialist sub-agents pending.
 - **Owner:** project maintainers.
 
 ### `.claude/agents/.gitkeep`

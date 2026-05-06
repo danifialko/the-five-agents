@@ -16,9 +16,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `.claude/skills/` — skills מותאמים לפרויקט
 - `.claude/commands/` — slash commands מותאמים לפרויקט
 
-כל שלוש התיקיות ריקות כרגע ויתמלאו בהמשך.
+## Agents
+
+- `.claude/agents/enzo.md` — **Enzo**, ה-CEO. נקודת הכניסה הראשית למשימות. מתזמר את הצוות, מבצע בקרת איכות, ומאשר את התוצר הסופי.
+
+סוכני המומחים שתחת Enzo טרם הוגדרו ויתווספו בהמשך.
 
 ## Status
 
-שלב נוכחי: scaffolding בלבד. אין עדיין קוד, build, tests, או הגדרות סוכנים.
-פרטים נוספים (ארכיטקטורה, פקודות build/test, הגדרות סוכנים) יתווספו לקובץ הזה ככל שהפרויקט יתקדם.
+שלב נוכחי: scaffolding + Enzo (CEO) מוגדר; סוכני המומחים בהמתנה.
+פרטים נוספים (ארכיטקטורה, פקודות build/test, הגדרות סוכנים נוספות) יתווספו לקובץ הזה ככל שהפרויקט יתקדם.
