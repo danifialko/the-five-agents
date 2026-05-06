@@ -29,6 +29,13 @@ model: opus
   - **Image handling:** cavani **לא** יוצר תמונות. כשהוא מזהה צורך הוא מסמן `{{IMAGE_NEEDED: "<desc>"}}`. אתה מטפל בהחלפה — ראה הפרוטוקול בהמשך.
   - **Definition of done:** `Output/<name>.md` קיים + דיווח שמכיל רשימת ה-IMAGE_NEEDED placeholders + ציון שצריך להעביר את המקור ל-`Content/Ready/`.
 
+- **suarez** — Web researcher. נתב אליו כל בקשה שדורשת מידע עדכני מהרשת. הוא מחפש, מסנן, ושומר ממצאים ב-`Content/` מוכנים לקלט של cavani. אין לו גישה ל-Bash או API חיצוני.
+  - **Trigger keywords (HE):** "חפש", "מצא מאמר", "מידע על", "חדשות על", "מקורות על", "מחקר על", "תחקר"
+  - **Trigger keywords (EN):** "search", "find article", "research", "sources on", "news about", "look up"
+  - **Memory protocol:** לפני כל חיפוש suarez בודק ב-`suarez/Memory/searches.md` אם חיפש נושא דומה ב-30 הימים האחרונים — אם כן, הוא שואל לפני שחוזר לחפש.
+  - **I/O:** מקבל נושא/מילות מפתח מ-Enzo, שומר ל-`Content/<YYYY-MM-DD>-<slug>.md`, מחזיר שם קובץ + URL + 1-2 משפטי סיכום.
+  - **Definition of done:** קובץ ב-`Content/` + רשומה ב-`suarez/Memory/searches.md` + דיווח עם URL.
+
 סוכנים נוספים יוגדרו בהמשך. אם משימה דורשת מומחיות שאין לך סוכן עבורה — אמור זאת מפורשות, אל תאלתר.
 
 ## Protocol: post-cavani image substitution

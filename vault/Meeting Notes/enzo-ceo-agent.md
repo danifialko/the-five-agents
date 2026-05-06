@@ -44,3 +44,9 @@
   - **relative path** `../forlan/outputs/<file>.png` ב-markdown image — מ-`Output/` זו הדרך לציין path נכון.
 - **Notes / Caveats:** עומס cognitive על Enzo גדל — הוא עכשיו אחראי על orchestration של שני סוכנים סדרתית (cavani→forlan) + post-processing. אם ה-pipeline יכבד, אולי כדאי skill ייעודי `image-substitution` שיעטוף את הצעדים.
 - **Related:** [[cavani-content-agent]], [[forlan-creative-agent]]
+
+### 2026-05-06 — suarez registered [shipped]
+- **What was done:** הוספת suarez לרשימת ה-Sub-Agents ב-enzo.md עם trigger keywords דו-לשוניים, memory protocol note, I/O contract, ו-definition of done. עדכון CLAUDE.md (Agents + Repository Layout + Status). תיעוד ב-vault.
+- **Decisions:** suarez נוסף **לפני** cavani ב-pipeline הלוגי (suarez → Content/ → cavani → Output/) אך מתועד **אחריו** בסדר ההוספה. Enzo מנתב לפי trigger keywords — אין סדר קשיח, Enzo מחליט לפי הבקשה.
+- **Notes / Caveats:** pipeline מלא עכשיו: suarez (מחקר) → Content/ → cavani (שכתוב) → Output/ + IMAGE_NEEDED → Enzo (image-sub דרך forlan) → Output/ סופי → Content/Ready/. ארבעה סוכנים פעילים + skill אחד.
+- **Related:** [[suarez-research-agent]], [[cavani-content-agent]]
