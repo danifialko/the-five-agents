@@ -29,7 +29,7 @@ The `.claude/` directory holds project-specific customizations for Claude Code: 
 ### `.claude/skills/`
 - **Purpose:** Project-specific skills (capability bundles loaded by name). Each skill is a folder containing `SKILL.md` plus optional helper files.
 - **Status:** populated. Currently holds 14 skills from `obra/superpowers` and 3 user-installed Obsidian skills.
-- **Detail:** see [[superpowers-skills-catalog]] and [[obsidian-skills-catalog]].
+- **Detail:** see [[superpowers-skills-catalog]], [[obsidian-skills-catalog]], and [[anthropic-skills-catalog]].
 
 ### `.claude/skills/.gitkeep`
 - **Purpose:** Original placeholder from initial scaffolding. Now redundant since the directory has real content, but harmless.
