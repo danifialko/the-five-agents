@@ -4,8 +4,7 @@
 Three Obsidian-related skills installed by the user under `.claude/skills/`. They govern how Claude Code reads from and writes to the project vault, how it formats Obsidian Flavored Markdown (wikilinks, callouts, frontmatter), and how it works with Obsidian Bases (database-like views). The most important of the three — **`obsidian-vault-workflow`** — defines the mandatory protocol for reading topic files at task start and appending dated session entries at task end.
 
 ## Open Questions
-- The user requested that `obsidian-vault-workflow` be invoked at the start of every session and every command. That requires a hook in `.claude/settings.json` (memory/preferences alone cannot trigger automated behavior). Should we set this up via the `update-config` skill?
-- These three skills are local-only and have not been pushed to GitHub yet.
+- none
 
 ## File-by-file reference
 
@@ -32,3 +31,9 @@ Three Obsidian-related skills installed by the user under `.claude/skills/`. The
 - **Decisions:** Treat `obsidian-vault-workflow` as the primary discipline for all future sessions. The other two skills (`obsidian-bases`, `obsidian-markdown`) are utilities loaded by content/format need.
 - **Notes / Caveats:** These three skills are not yet committed/pushed. The user wants the workflow auto-loaded every session — that needs a hook (see Open Questions).
 - **Related:** [[claude-folder-structure]], [[obsidian-vault-setup]], [[superpowers-skills-catalog]]
+
+### 2026-05-06 — SessionStart hook + push to GitHub [shipped]
+- **What was done:** Created `.claude/settings.json` with a `SessionStart` hook that emits `hookSpecificOutput.additionalContext` reminding Claude to invoke the obsidian-vault-workflow skill before any task. Committed everything (3 obsidian skills, vault scaffolding, hook config, .obsidian/ config) as `0e345f6` and pushed to `origin/main`.
+- **Decisions:** Chose `SessionStart` over `UserPromptSubmit` — fires once per session (less noisy) and is enough to anchor the workflow. Used `echo`-based command (no jq/python/node needed; portable on the user's Windows + Git Bash setup).
+- **Notes / Caveats:** The hook fires at session start, but Claude Code only watches `.claude/settings.json` for changes if it existed when the session started. First activation may require opening `/hooks` once or restarting Claude Code. Verified the JSON structure by Read-back.
+- **Related:** [[claude-folder-structure]], [[obsidian-vault-setup]]
