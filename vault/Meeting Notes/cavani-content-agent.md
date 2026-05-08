@@ -24,6 +24,20 @@
 - **Notes / Caveats:** `cavani/style-guide.md` עדיין לא קיים — המשתמש מתכוון להוסיפו בנפרד. עד אז cavani יחזיר `BLOCKED: Missing or empty cavani/style-guide.md` על כל בקשת שכתוב. גם `cavani/reference/` ריקה — האפקט: שכתוב יסתמך רק על ה-guide.
 - **Related:** [[forlan-creative-agent]], [[gpt-image-gen-skill]], [[enzo-ceo-agent]], [[claude-folder-structure]]
 
+### 2026-05-08 — style-guide + valverde extended from 53 user corrections (Heb + Esp) [shipped]
+- **What was done:** המשתמש הזין 32 תיקונים לעברית של מאמר ארגנטינה ו-21 לספרדית. הוצאתי דפוסים חוזרים והרחבתי את כללי הכתיבה. **לא נגעתי במאמרים עצמם** לפי הוראת המשתמש המפורשת ("לא צריך לערוך שום דבר, רק ללמוד לכתוב"). שינויים בקבצי הכללים בלבד:
+  - **חדש:** `cavani/style-guide-spanish.md` — 7 דפוסים ספציפיים לרגיסטר ספרדי (artículos, אחידות זמנים פשוט/מורכב, מילות יחס עיתונאיות, רגיסטר אינטרנציונלי-לטיני vs rioplatense, פיסוק רשימות עם `y`, קומפקטיות, חיבוריות פרונומינלית עם `en la que`).
+  - **הורחב:** `cavani/style-guide.md` — בקטע ב' (Hard Rules) נוספו: 7 calques חדשים לרשימה, טבלת רגיסטר ספורט עברי (על הספסל→על הקווים, על החוד→בחוד וכו'), שימוש מדויק פנדל-מול-בעיטה בדו-קרב, מילות יחס טבעיות (על→ב/בזכות). בקטע ד' (Hebrew-First) נוספו: Mbappé→אמבפה, כתיב תקני (הכול/שוקי). אחרי קטע ה' נוספו ארבעה sub-rules אוניברסליים: אנטי-קטיעה בסיום, חזרת פעלים סמוכים, אנפורה מלאה, וקישור לקובץ הספרדי.
+  - **הורחב:** `.claude/agents/valverde.md` — Working Directories עודכן עם הקובץ הספרדי. Cat 5 קיבל 9 sub-checks חדשים שמכסים את כל הדפוסים החדשים: 4 אוניברסליים, 4 עבריים-ספציפיים, 4 ספרדיים-ספציפיים.
+- **Decisions:**
+  - **לא לערוך את המאמרים** — המשתמש העדיף לשמור על הגרסה הקיימת והמטרה היא הוראת cavani/valverde, לא תיקון רטרוספקטיבי. הפעלתי `git checkout` לשני הקבצים.
+  - **קובץ ספרדי נפרד** — לא סקציה בסטייל-גייד הראשי, מסיבת volume + relevance: cavani שכותב בעברית לא צריך לקרוא 7 דפוסי ספרדית.
+  - **תיקונים בודדים → כללים** רק כש-(א) הסבר ברור (ב) דפוס שיכול לחזור. תיקונים נקודתיים שלא ניתן להכליל (כמו "שלוש דמויות" → "שלוש תקופות" — שיפוט סמנטי ספציפי) **לא** הפכו לכללים.
+  - **valverde חייב גם הוא לדעת** את הכללים החדשים, אחרת הוא לא יתפוס. לכן הקטגוריה הורחבה במקביל.
+  - **לא הוספתי את המאמרים המתוקנים ל-`cavani/reference/`** — לפי הוראת המשתמש, ההוראה היא לימוד, לא העתק/שכפול.
+- **Notes / Caveats:** עדיין לא ניסינו את הכללים החדשים על מאמר חדש. אימות אמיתי יהיה בריצה הבאה — האם cavani אכן יחיל את הדפוסים, האם valverde יתפוס מה שיוחמץ. גם valverde לא רץ עוד על הכללים החדשים (לא נדרש meta-check בריצה זו לפי הוראת המשתמש).
+- **Related:** [[valverde-qa-agent]], [[enzo-ceo-agent]]
+
 ### 2026-05-08 — cavani unblocked: style-guide + reference samples [shipped]
 - **What was done:** יצירת `cavani/style-guide.md` (5 בלוקים: Voice, Hard Rules, Sentence Rhythm, Hebrew-First, Structure, +bonus image placeholder convention) שמתבסס על feedback_writing_style.md ועל המאמר על אורוגוואי שעבר 6 סבבי QA. אכלוס `cavani/reference/` ב-2 samples (`2026-05-08-uruguay-mundial-2026-hebrew-sample.md` 1,500 מילים, `2026-05-06-uruguay-world-cup-2026-english-sample.md` 600 מילים) + `README.md` שמסביר את הפרוטוקול. עדכון Status ב-`CLAUDE.md`. cavani עכשיו unblocked לבקשות עתידיות.
 - **Decisions:**
