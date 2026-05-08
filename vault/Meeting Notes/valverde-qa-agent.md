@@ -7,9 +7,9 @@
 ## Open Questions
 
 - האם להוסיף מטריקה אגרגטיבית (% תוצרים שעוברים סבב #1) על בסיס היסטוריה ב-`QA_Reports/`?
-- האם valverde צריך לבדוק גם תוצרי forlan (תמונות בודדות) או רק markdown ב-`Output/`?
 - מה לעשות אם `cavani/style-guide.md` עדיין חסר — לאשר ללא בדיקת סגנון (כפי שמוגדר עכשיו ⚠️) או לדחות אוטומטית?
 - האם 3 סבבים זה הסף הנכון, או שצריך לאפשר יותר במקרים מורכבים?
+- האם valverde צריך לבדוק גם תמונות שנוצרו בנפרד (לא במסגרת מאמר), או רק כשהן embedded במאמר?
 
 ## File reference
 
@@ -28,6 +28,16 @@
 - **Tracked in git:** yes (`.gitkeep`).
 
 ## Session Log
+
+### 2026-05-08 — image QA category added (visual content) [shipped]
+- **What was done:** הרחבת valverde לבדוק גם תוכן ויזואלי. עדכוני `.claude/agents/valverde.md`: (א) הוספת `forlan/outputs/` ל-Working Directories כקריאה בלבד; (ב) Workflow שלב 5 דורש Glob+Read לכל תמונה ב-markdown; (ג) קטגוריה 6 חדשה בצ'קליסט (6 סעיפים: קיום, התאמה לתיאור, שייכות לאומית/מותגית, טקסט/מספרים, לוגואים מסחריים, דמיון לאישים); (ד) Quality Bar עודכן עם פסילות אוטומטיות לתמונה (דגלים זרים, לוגו מקושקש); (ה) Constraints עודכן ש-Read תומך בתמונות וחובה להשתמש בזה. דוח התבנית עודכן עם דוגמת קטגוריה 6.
+- **Decisions:**
+  - **לא מחליפים את ה-tools allowlist.** Read כבר תומך ב-PNG/JPG; אין צורך ב-tool חדש.
+  - **תמונה עם דגלים זרים = ❌ אוטומטי.** זה לא דבר שאפשר לקרוא לו "מינורי".
+  - **דמיון לאישים ספציפיים — סף נמרץ:** אם תיאור טוען לדמיון ולא ניתן לזיהוי = ❌. (זה בדיוק מה שהפיל את `2026-05-08-uruguay-legends-montage.png` — סוארס/קבאני זוהו, אבל פרנצ'סקולי/טבארס/ביאלסה לא.)
+  - **לא דורשים גישה לאינטרנט לאימות אישים.** valverde שופט לפי הופעה כללית מול ארכיטיפ + הקשר הסעיף. גבול ידוע — אם יש אדם שלא מוכר ב-training set של המודל, ייתכן שהוא יחמיץ.
+- **Notes / Caveats:** התקלה שהובילה להרחבה — תמונת `2026-05-08-uruguay-legends-montage.png` כללה דגלי ארגנטינה בקהל ופרצופים שלא דמו לאישים שצוטטו בכותרת. valverde של סבב #2 אישר את המאמר ✅ אבל לא בדק את התמונה. הרחבה זו סוגרת את הפער. ה-Open Question המקורית ("האם valverde צריך לבדוק גם תמונות?") נסגרה.
+- **Related:** [[forlan-creative-agent]], [[enzo-ceo-agent]]
 
 ### 2026-05-08 — valverde defined + QA Loop integrated [shipped]
 - **What was done:** יצירת `.claude/agents/valverde.md` עם frontmatter ו-system prompt מלא בעברית. יצירת workspace `valverde/` עם `agent.md` ו-`QA_Reports/.gitkeep`. עדכון `.claude/agents/enzo.md` עם valverde ב-Sub-Agents (כולל auto-trigger note), פרוטוקול חדש "QA Loop" עם 5-step loop logic ו-3-rounds escalation, ועדכון Operating Loop שלב 9. עדכון `CLAUDE.md` (Agents + Repository Layout + Status). תיעוד ב-vault.
