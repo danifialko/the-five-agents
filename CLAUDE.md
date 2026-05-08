@@ -22,6 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `Content/Ready/` — מאמרים שטופלו (Enzo מעביר לשם אחרי שילוב תמונות)
 - `Output/` — תוצרים משוכתבים של cavani; Enzo מחליף בהם `{{IMAGE_NEEDED}}` placeholders ע"י forlan
 - `suarez/Memory/` — לוג חיפושים של suarez (מונע חיפוש כפול ב-30 יום)
+- `valverde/QA_Reports/` — דוחות QA היסטוריים של valverde (לוג מלא של כל בדיקה, לכל מאמר, לכל סבב)
 
 ## Agents
 
@@ -29,6 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `.claude/agents/forlan.md` — **forlan** (פורלאן), סוכן קריאייטיב / יצירת תמונות. נקרא ע"י Enzo כשנדרש ויזואל. משתמש בסקיל `gpt-image-gen` ועובד מול `forlan/reference/` + `forlan/outputs/`.
 - `.claude/agents/cavani.md` — **cavani** (קבי), סוכן Content writer/rewriter. LLM-only (Read/Write/Edit/Glob/Grep). משכתב מאמרי גלם מ-`Content/` ל-`Output/` בסגנון `cavani/style-guide.md`. מסמן צורך בתמונה ב-`{{IMAGE_NEEDED}}` placeholders ש-Enzo מחליף ע"י forlan.
 - `.claude/agents/suarez.md` — **suarez**, סוכן מחקר רשת (WebSearch, WebFetch, Read/Write/Edit/Glob/Grep). מחפש מאמרים ומקורות ברשת, מסנן, ושומר ממצאים ב-`Content/` כקלט ל-cavani. פרוטוקול זיכרון ב-`suarez/Memory/searches.md` מונע חיפוש כפול.
+- `.claude/agents/valverde.md` — **valverde**, סוכן QA. הסוכן האחרון בשרשרת, סוגר הלולאה. read-mostly (`Read, Glob, Grep, Write`). רץ אוטומטית בסוף כל pipeline, מפיק דוח ב-`valverde/QA_Reports/`, מחזיר ל-Enzo ✅ APPROVED / ❌ NEEDS FIX. הסוכן היחיד שמורשה לדחות תוצר.
 
 סוכני מומחים נוספים תחת Enzo יוגדרו בהמשך.
 
@@ -38,5 +40,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Status
 
-שלב נוכחי: scaffolding + Enzo (CEO) + forlan (creative) + cavani (writer) + suarez (researcher) + skill `gpt-image-gen`; שאר סוכני המומחים בהמתנה.
+שלב נוכחי: scaffolding + 5 סוכנים (Enzo / forlan / cavani / suarez / valverde) + skill `gpt-image-gen`. הלולאה סגורה: valverde חותם על כל תוצר לפני שחרור.
 פרטים נוספים (ארכיטקטורה, פקודות build/test, הגדרות סוכנים נוספות) יתווספו לקובץ הזה ככל שהפרויקט יתקדם.

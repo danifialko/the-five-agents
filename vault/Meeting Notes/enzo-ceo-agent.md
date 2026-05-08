@@ -50,3 +50,14 @@
 - **Decisions:** suarez נוסף **לפני** cavani ב-pipeline הלוגי (suarez → Content/ → cavani → Output/) אך מתועד **אחריו** בסדר ההוספה. Enzo מנתב לפי trigger keywords — אין סדר קשיח, Enzo מחליט לפי הבקשה.
 - **Notes / Caveats:** pipeline מלא עכשיו: suarez (מחקר) → Content/ → cavani (שכתוב) → Output/ + IMAGE_NEEDED → Enzo (image-sub דרך forlan) → Output/ סופי → Content/Ready/. ארבעה סוכנים פעילים + skill אחד.
 - **Related:** [[suarez-research-agent]], [[cavani-content-agent]]
+
+### 2026-05-08 — valverde registered + QA Loop protocol [shipped]
+- **What was done:** הוספת valverde לרשימת Sub-Agents ב-enzo.md עם trigger keywords דו-לשוניים ו-auto-trigger note. הוספת סקציית "Protocol: QA Loop" עם 5-step loop logic + escalation לסבב #3 (אסקלציה למשתמש, לא ל-Enzo). עדכון Operating Loop שלב 9 כך ש-valverde חלק אינטגרלי מ"אישור סופי". עדכון CLAUDE.md (Agents + Repository Layout + Status). תיעוד ב-vault.
+- **Decisions:**
+  - **valverde רץ אוטומטית** — לא דורש trigger מהמשתמש. כל תוצר עובר QA לפני שחרור. זה הסוכן הראשון בפרויקט עם דפוס auto-trigger.
+  - **3 סבבים תקרה.** אחרי 3 דחיות — אסקלציה למשתמש (לא ל-Enzo להחליט לבד). מונע loops אינסופיים ושומר על אחריות מפורשת.
+  - **valverde לא נוגע בתוצר** — `tools: Read, Glob, Grep, Write` בלבד, בלי Edit. מכוון: אם יוכל לערוך, יתפתה לתקן ולא לדווח, ויתחיל לעקוף את cavani.
+  - **לוג בכל סבב.** גם ✅ נרשם ב-`valverde/QA_Reports/`. היסטוריה מלאה לניתוח מגמות עתידי.
+  - **Hard rule:** valverde הוא הסוכן היחיד שמורשה לדחות תוצר. בלי ✅ שלו (או אישור משתמש מפורש בסבב 3) — אין שחרור.
+- **Notes / Caveats:** עומס נוסף על Enzo — עכשיו אחראי על loop ניהול עד 3 סבבים בין cavani ל-valverde. אם זה יכבד, יישקל skill ייעודי `qa-loop-orchestration`. valverde לא יכול לקרוא ל-cavani ישירות (Claude Code לא מאפשר sub-agent → sub-agent), ולכן כל ה-loop logic יושב ב-Enzo. ה-style-guide של cavani עדיין חסר — valverde יסמן זאת כ-⚠️ ולא יכשיל על זה לבד.
+- **Related:** [[valverde-qa-agent]], [[cavani-content-agent]]
