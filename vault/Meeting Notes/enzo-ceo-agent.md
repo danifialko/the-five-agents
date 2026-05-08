@@ -51,6 +51,16 @@
 - **Notes / Caveats:** pipeline מלא עכשיו: suarez (מחקר) → Content/ → cavani (שכתוב) → Output/ + IMAGE_NEEDED → Enzo (image-sub דרך forlan) → Output/ סופי → Content/Ready/. ארבעה סוכנים פעילים + skill אחד.
 - **Related:** [[suarez-research-agent]], [[cavani-content-agent]]
 
+### 2026-05-08 — first full 5-agent pipeline run (Argentina article) [shipped]
+- **What was done:** הפעלה ראשונה של ה-pipeline המלא על משימת תוכן: מאמר על נבחרת ארגנטינה לקראת מונדיאל 2026 + תמונה סימבולית של מסי ב"ריקוד האחרון". סדר הביצוע: (1) שיגור suarez ו-forlan **במקביל** (background) — suarez למחקר, forlan לתמונה; (2) עם חזרת suarez, שיגור cavani עם בריף סגנוני + פויינטר ל-`Content/2026-05-08-argentina-mundial-2026.md`; (3) Enzo החליף `{{IMAGE_NEEDED}}` בתמונה של forlan + העביר את המקור ל-`Content/Ready/`; (4) שיגור valverde לסבב QA מלא (6 קטגוריות). תוצאה: ✅ APPROVED בסבב #1 + תיקון nit קטן (deadline → מועד הגשת).
+- **Decisions:**
+  - **suarez ו-forlan במקביל.** המחקר והתמונה אינם תלויים זה בזה — חיסכון של ~2 דקות wall-clock.
+  - **Enzo כתב את ה-image alt text** במקום cavani. ה-placeholder היה באנגלית (לפי הסטייל-גייד), אבל ה-alt העברי הוא חלק מהאינטגרציה. שגיאה שעשיתי בתחילה: כללתי EM dash ב-alt — זיהיתי ותיקנתי בעצמי לפני שיגור valverde.
+  - **cavani's first production run** — ה-style-guide ו-reference samples שנכתבו מוקדם הסשן עבדו. הסוכן לא נכשל ב-`BLOCKED:`, קרא את ה-anchor, חילץ את הדפוסים מהמדגם הקודם של אורוגוואי, וייצר טקסט שעבר QA נקי.
+  - **suarez הזהיר במפורש מה לא לכתוב** ("מסי הצהיר רשמית"). cavani כיבד את זה. valverde אימת. שלוש שכבות הגנה.
+- **Notes / Caveats:** המסגור "ריקוד אחרון" עבד יפה כי הוא קיים אובייקטיבית באקוסיסטם (Adidas "El Último Tango" + תקשורת + ציטוטי מסי) — לא היה צורך להמציא אותו. אם המסגור היה מבוסס יותר על ספקולציה, הסיכון לטעות סגנונית/עובדתית היה גבוה יותר.
+- **Related:** [[suarez-research-agent]], [[cavani-content-agent]], [[forlan-creative-agent]], [[valverde-qa-agent]]
+
 ### 2026-05-08 — valverde registered + QA Loop protocol [shipped]
 - **What was done:** הוספת valverde לרשימת Sub-Agents ב-enzo.md עם trigger keywords דו-לשוניים ו-auto-trigger note. הוספת סקציית "Protocol: QA Loop" עם 5-step loop logic + escalation לסבב #3 (אסקלציה למשתמש, לא ל-Enzo). עדכון Operating Loop שלב 9 כך ש-valverde חלק אינטגרלי מ"אישור סופי". עדכון CLAUDE.md (Agents + Repository Layout + Status). תיעוד ב-vault.
 - **Decisions:**
