@@ -40,5 +40,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Status
 
-שלב נוכחי: scaffolding + 5 סוכנים (Enzo / forlan / cavani / suarez / valverde) + skill `gpt-image-gen`. הלולאה סגורה: valverde חותם על כל תוצר לפני שחרור.
+שלב נוכחי: scaffolding + 5 סוכנים (Enzo / forlan / cavani / suarez / valverde) + skill `gpt-image-gen`. cavani נפתח עם `cavani/style-guide.md` + `cavani/reference/` (2 samples — עברית ארוכה, אנגלית בינונית). הלולאה סגורה: valverde חותם על כל תוצר לפני שחרור.
 פרטים נוספים (ארכיטקטורה, פקודות build/test, הגדרות סוכנים נוספות) יתווספו לקובץ הזה ככל שהפרויקט יתקדם.
