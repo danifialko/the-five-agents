@@ -1,0 +1,24 @@
+Cinematic photorealistic still-life symbolic composition for an editorial sports article about Uruguay at the 2026 World Cup. Absolutely NO people, NO human faces, NO silhouettes of fans, NO crowds — the scene is completely empty of humans. Pure symbolic objects only.
+
+Foreground hero element: a Uruguay national football team jersey in solid sky-blue ("celeste") color, hanging on a simple metal hook on a worn concrete wall of a stadium tunnel / locker room. The jersey is shown from the BACK so the number is clearly visible. Bold, clean, white printed number "10" on the back, large and perfectly legible, single typographic style, not garbled, not duplicated. Plain jersey — no sponsor logos, no FIFA logo, no World Cup branding, no manufacturer branding. Optional black football shorts draped on a wooden bench beside the hook.
+
+Mid-ground left: a printed paper wall calendar pinned to the concrete wall, showing TWO months side by side. Left page header reads "JUNE 2026" (clearly spelled, clean sans-serif print, perfectly legible). Right page header reads "JULY 2026" (clearly spelled, clean sans-serif print, perfectly legible). The calendar shows a standard monthly grid of dates. On the JUNE 2026 page the dates 16, 22, and 27 are clearly circled with a red marker pen. Calendar is clean, minimalist, no other text, no logos, no branding.
+
+Mid-ground right: a football resting on the wooden bench or concrete floor in the foreground. The ball has a horizontally striped pattern wrapping around it — alternating sky-blue and white HORIZONTAL stripes (this is the Uruguayan flag pattern — horizontal stripes, NOT vertical). On one panel of the ball, a small golden sun emblem (Sol de Mayo) — a stylized golden sun with rays, no human face inside the sun, just abstract golden rays radiating outward. If the sun cannot be rendered cleanly, render the football as a classic black-and-white panel ball instead.
+
+Background: through an arched tunnel opening, the silhouette of Estadio Centenario in Montevideo is visible — the iconic 1930 art-deco concrete stadium with the tall rectangular Torre de los Homenajes (Tower of Tributes) rising on one side. Empty stadium, no spectators, no players, no human figures of any kind.
+
+Lighting: warm golden-hour sunlight streaming in from the tunnel opening at a low angle, casting long dramatic shadows across the concrete floor. Cinematic, moody, high contrast, photo-real.
+
+Color palette: dominant sky-blue (celeste) on the jersey and ball stripes, against warm earthy tones — weathered concrete grey, aged wood, soft golden light, deep shadow.
+
+Aspect: landscape, editorial magazine hero shot quality, shallow depth of field with the jersey tack-sharp.
+
+CRITICAL EXCLUSIONS — do not include any of the following:
+- NO people, NO human faces, NO silhouettes of humans, NO crowds, NO players, NO fans, NO referees.
+- NO Argentina flag. NO vertical sky-blue and white stripes anywhere. NO sun-with-face emblem in the center of any flag. The Uruguayan flag has HORIZONTAL stripes only.
+- NO flags of any other country.
+- NO FIFA logo, NO "WE ARE 26" branding, NO World Cup official trophy, NO copyrighted tournament marks.
+- NO sponsor logos, NO Adidas/Puma/Nike marks, NO manufacturer branding on the jersey or ball.
+- NO text anywhere except: the number "10" on the jersey back, and the words "JUNE 2026" / "JULY 2026" plus calendar date numerals on the calendar.
+- NO garbled / hallucinated text. All visible text must be clean and correctly spelled.
